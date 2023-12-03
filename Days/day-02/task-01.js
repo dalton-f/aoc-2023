@@ -23,7 +23,7 @@
 
 const fs = require("fs");
 
-let fileData = fs.readFileSync("Days/day-02/input.txt", "utf-8"); // read file using node
+let fileData = fs.readFileSync("days/day-02/input.txt", "utf-8"); // read file using node
 
 let games = fileData.split("\n"); // convert to an array
 

@@ -13,7 +13,7 @@
 
 const fs = require("fs");
 
-let text = fs.readFileSync("Days/day-01/input.txt", "utf-8"); // read file using node
+let text = fs.readFileSync("days/day-01/input.txt", "utf-8"); // read file using node
 
 let lines = text.split("\n"); // convert to an array
 
