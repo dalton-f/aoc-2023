@@ -5,5 +5,3 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 https://adventofcode.com/2023
 
 I will be using JavaScript this year, as my first year participating. 
-
-The repo will be updated daily to include my solutions for each task!
