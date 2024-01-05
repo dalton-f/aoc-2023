@@ -44,11 +44,6 @@ Welcome to my Advent of Code 2023 repository! 🎄 This markdown file will serve
 
 ### Day 5:
 
-- **Part 1:** In Progress 🛠️
-  - Code:
-
-## Thoughts and Reflections
-
-### Week 1
-
-I'm really enjoying the challenges so far! Day 3 has been the hardest yet, and took me quite a while to find a solution for. I believe I am truly overcomplicating some of these problems however the puzzles are quite engaging and it helps me spend time focusing on my JavaScript skills!
+- **Part 1:** Completed ✔️
+  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-05/task-01.js)
+- **Part 2:** In Progress 🛠️
