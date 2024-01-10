@@ -1,9 +1,8 @@
 // total race time (T)
-// time button held for(t)
+// time button held for (t)
 // distance travelled (y)
-// y=Tt-t^2
 
-// 288 = the product of the number of ways you can beat each record
+// y = Tt - t^2
 
 const fs = require("fs");
 
