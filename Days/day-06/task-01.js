@@ -4,6 +4,8 @@
 
 // y = Tt - t^2
 
+let starttime = performance.now();
+
 const fs = require("fs");
 
 let input = fs.readFileSync("days/day-06/input.txt", "utf-8"); // read file using node
@@ -47,3 +49,7 @@ for (let i = 0; i < times.length; i++) {
 }
 
 console.log(total);
+
+let endtime = performance.now();
+
+console.log(endtime - starttime);
