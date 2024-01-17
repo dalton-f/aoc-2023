@@ -75,21 +75,20 @@ for (let i = 0; i < hands.length; i++) {
   }
 
   if (uniqueCardCount === 3) {
-    // same logic as for uniquecardcount 2
-    const cardOccurences = hands[i]
-      .split("")
-      .filter((card) => card === uniqueCards[0]).length;
+    // generates an array of the count of each unique card
 
-    const cardOccurences2 = hands[i]
-      .split("")
-      .filter((card) => card === uniqueCards[1]).length;
+    const cardOccurences = uniqueCards.map(
+      (card) => hands[i].split("").filter((c) => c === card).length
+    );
 
     // three of a kind
 
-    if (cardOccurences === 3 || cardOccurences2 === 3) {
+    // if any card has a count equal to 3
+
+    if (cardOccurences.some((count) => count === 3)) {
       sortedHands.push([hands[i], 6, bids[i]]);
     }
-    // two pair
+    // otherwise assume it is a two pair
     else {
       sortedHands.push([hands[i], 5, bids[i]]);
     }
@@ -105,15 +104,11 @@ for (let i = 0; i < hands.length; i++) {
 sortedHands.sort((a, b) => {
   // sort by hand if they arent the same hand
   if (a[1] !== b[1]) return b[1] - a[1];
-  else {
-    // loop over each card in both hands to find one whcih doesn't match
-    for (let i = 0; i < a[0].length; i++) {
-      // if they don't match
-      if (a[0][i] !== b[0][i]) {
-        // get the index of each card, to compare its strength
-        return cardStrengths.indexOf(a[0][i]) - cardStrengths.indexOf(b[0][i]);
-      }
-    }
+  // loop over each card in both hands to find one whcih doesn't match
+  for (let i = 0; i < a[0].length; i++) {
+    // if they don't match, get each index of card relative to cardStrenghts to compare them
+    if (a[0][i] !== b[0][i])
+      return cardStrengths.indexOf(a[0][i]) - cardStrengths.indexOf(b[0][i]);
   }
 });
 
@@ -124,7 +119,8 @@ sortedHands.reverse();
 // calculate total
 
 for (let i = 0; i < sortedHands.length; i++) {
-  total += sortedHands[i][2] * (i + 1);
+  let winnings = sortedHands[i][2] * (i + 1);
+  total += winnings;
 }
 
 console.log(total);
