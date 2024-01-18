@@ -1,5 +1,4 @@
 // remove empty lines and split into an array of lines where each line represents [hand, bid]
-
 const fs = require("fs");
 
 let input = fs.readFileSync("days/day-07/input.txt", "utf-8"); // read file using node
@@ -51,7 +50,9 @@ for (let i = 0; i < hands.length; i++) {
 
   // high card where we are pushing hand, arbitrary strength, bid
 
-  if (uniqueCardCount === 0) sortedHands.push([hands[i], 3, bids[i]]);
+  // BUG - set to uniqueCardCount = 0 which can never happen, should === 5 to match a hand where none of the cards are the same (every one is unique)
+
+  if (uniqueCardCount === 5) sortedHands.push([hands[i], 3, bids[i]]);
 
   // five of a kind
 
@@ -65,13 +66,14 @@ for (let i = 0; i < hands.length; i++) {
 
     // four of a kind
 
-    if (cardOccurences === 4 || cardOccurences === 1)
+    if (cardOccurences === 4 || cardOccurences === 1) {
       sortedHands.push([hands[i], 8, bids[i]]);
+    }
 
     // full house
-
-    if (cardOccurences === 2 || cardOccurences === 3)
+    else if (cardOccurences === 2 || cardOccurences === 3) {
       sortedHands.push([hands[i], 7, bids[i]]);
+    }
   }
 
   if (uniqueCardCount === 3) {
