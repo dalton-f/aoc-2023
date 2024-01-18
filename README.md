@@ -47,3 +47,21 @@ Welcome to my Advent of Code 2023 repository! 🎄 This markdown file will serve
 - **Part 1:** Completed ✔️
   - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-05/task-01.js)
 - **Part 2:** In Progress 🛠️
+
+  ### Day 6:
+
+- **Part 1:** Completed ✔️
+  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-06/task-01.js)
+- **Part 2:** Completed ✔️
+  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-06/task-02.js)
+ 
+  ### Day 7:
+
+- **Part 1:** In Progress 🛠️
+- **Part 2:** In Progress 🛠️
+
+  ### Day 8:
+
+- **Part 1:** Completed ✔️
+  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-08/task-01.js)
+- **Part 2:** In Progress 🛠️
