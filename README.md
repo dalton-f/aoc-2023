@@ -17,51 +17,39 @@ Welcome to my Advent of Code 2023 repository! 🎄 This markdown file will serve
 ### Day 1:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-01/task-01.js)
 - **Part 2:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-01/task-02.js)
 
 ### Day 2:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-02/task-01.js)
 - **Part 2:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-02/task-02.js)
 
 ### Day 3:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-03/task-01.js)
 - **Part 2:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-03/task-02.js)
 
 ### Day 4:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-04/task-01.js)
 - **Part 2:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-04/task-02.js)
 
 ### Day 5:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-05/task-01.js)
 - **Part 2:** In Progress 🛠️
 
   ### Day 6:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-06/task-01.js)
 - **Part 2:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-06/task-02.js)
  
   ### Day 7:
 
-- **Part 1:** In Progress 🛠️
+- **Part 1:** Completed ✔️
 - **Part 2:** In Progress 🛠️
 
   ### Day 8:
 
 - **Part 1:** Completed ✔️
-  - [Code](https://github.com/dalton-f/Advent-of-Code-2023/blob/main/Days/day-08/task-01.js)
 - **Part 2:** In Progress 🛠️
