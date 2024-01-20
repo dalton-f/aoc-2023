@@ -53,8 +53,8 @@ Welcome to my Advent of Code 2023 repository! 🎄 This markdown file will serve
 
 - **Part 1:** Completed ✔️
 - **Part 2:** Completed ✔️
-- **Part 2:** In Progress 🛠️
 
   ### Day 9:
-  - **Part 1:** In Progress 🛠️
-  - **Part 2:** In Progress 🛠️
+  
+- **Part 1:** Completed ✔️
+- **Part 2:** In Progress 🛠️
