@@ -1,3 +1,5 @@
+const { lcm } = require("mathjs");
+
 // remove any blank lines before and after the input and split by a blank line of space
 
 const fs = require("fs");
@@ -5,9 +7,12 @@ const fs = require("fs");
 let input = fs.readFileSync("days/day-08/input.txt", "utf-8"); // read file using node
 
 input = input.split(/\r?\n\s*\r?\n/); // split by a a full linebreak that seperates each piece of data
+
 // deconstruct into usable variables
 
 let [directions, nodeMap] = input;
+
+let stepCollection = [];
 
 // split the node mappings into lines
 
@@ -43,22 +48,26 @@ nodeMap.forEach((node) => {
   }
 });
 
-// repeat while all the current nodes do not end in Z
+currentNodes.forEach((node) => {
+  // reset step count foreach node
+  steps = 0;
 
-while (!currentNodes.every((node) => node.endsWith("Z"))) {
-  // loop over the directions until the end and then start at the front
-  let direction = directions[steps % directions.length];
+  // loop until it ends in Z
+  while (!node.endsWith("Z")) {
+    // loop over the directions until the end and then start at the front
+    let direction = directions[steps % directions.length];
 
-  // loop over each of the current nodes so they get converted together
+    let currentMap = nodeMap.filter((map) => map.node === node);
+    node = currentMap[0][direction];
 
-  for (let i = 0; i < currentNodes.length; i++) {
-    let currentMap = nodeMap.filter((map) => map.node === currentNodes[i]);
-    currentNodes[i] = currentMap[0][direction];
+    steps++;
   }
 
-  // increment steps until we reach a point where all the current nodes end with Z
+  // push the amount of steps it took for that node to reach an end node
 
-  steps++;
-}
+  stepCollection.push(steps);
+});
 
-console.log(steps);
+// get LCM of step collection
+
+console.log(lcm(...stepCollection));
