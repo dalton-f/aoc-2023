@@ -1,22 +1,15 @@
 const fs = require("fs");
 
 const nums = {
-  eightwo: 82,
-  oneight: 18,
-  threeight: 38,
-  fiveight: 58,
-  sevenine: 79,
-  eighthree: 83,
-  nineight: 98,
-  one: 1,
-  two: 2,
-  three: 3,
-  four: 4,
-  five: 5,
-  six: 6,
-  seven: 7,
-  eight: 8,
-  nine: 9,
+  one: "o1ne",
+  two: "t2wo",
+  three: "t3hree",
+  four: "f4our",
+  five: "f5ive",
+  six: "s6x",
+  seven: "s7even",
+  eight: "e8ight",
+  nine: "n9ne",
 };
 
 let text = fs.readFileSync("days/day-01/input.txt", "utf-8"); // read file using node
