@@ -1,45 +1,12 @@
-// expected 46
+const fs = require("fs");
 
-// 50 98 2 means seed number 98 = 50 and seed number 99 = 51
+let input = fs.readFileSync("days/day-05/input.txt", "utf-8"); // read file using node
 
-let input = `
-seeds: 79 14 55 13
+input = input.split(/\n\s*\n/); // split by a a full linebreak that seperates each piece of data
 
-seed-to-soil map:
-50 98 2
-52 50 48
+let seedsRanges = [];
 
-soil-to-fertilizer map:
-0 15 37
-37 52 2
-39 0 15
-
-fertilizer-to-water map:
-49 53 8
-0 11 42
-42 0 7
-57 7 4
-
-water-to-light map:
-88 18 7
-18 25 70
-
-light-to-temperature map:
-45 77 23
-81 45 19
-68 64 13
-
-temperature-to-humidity map:
-0 69 1
-1 0 69
-
-humidity-to-location map:
-60 56 37
-56 93 4`;
-
-input = input.trim().split("\n\n");
-
-// deconstruct array into vars
+// use deconstruction to assign each map into a variable
 
 let [
   seeds,
@@ -52,10 +19,7 @@ let [
   humidToLoc,
 ] = input;
 
-let seedRanges = [],
-  newRanges = [];
-
-// format seeds into an array of type number
+// format seeds by removing the text and creating an array of type number
 
 seeds = seeds
   .split(":")[1]
@@ -63,56 +27,93 @@ seeds = seeds
   .filter((item) => item)
   .map(Number);
 
+// loop through the seeds in pairs to generate the initial seed ranges
+
 for (let i = 0; i < seeds.length; i += 2) {
-  seedRanges.push({ start: seeds[i], end: seeds[i] + seeds[i + 1] });
+  seedsRanges.push({ start: seeds[i], end: seeds[i] + seeds[i + 1] });
 }
 
-const convertData = (data, map) => {
-  newRanges = [];
+// set up function to use for each map to do conversions
 
-  // format map
+const convertData = (data, map) => {
+  let newRanges = [];
+
+  // format map by removing the text and generating an array of
+
   map = map
     .split(":")[1]
     .split("\n")
     .filter((item) => item);
 
-  // loop over and format lines
+  // loop over each line in the map
 
-  map.forEach((line) => {
-    // split each line of the map into an array of type number
-    line = line.split(" ").map(Number);
-    // deconstruct into relevant variables
-    const [dst, src, len] = line;
+  data.forEach((range) => {
+    let wasConverted = false;
+    map.forEach((line) => {
+      // split the line into an array of numbers so we can get each value
 
-    // loop over each range
+      line = line.split(" ").map(Number);
 
-    data.forEach((range) => {
-      // overflow at the end
-      if (range.start > src && range.end > src + len) {
-        newRanges.push({ start: range.start, end: src + len - 1 });
-        newRanges.push({ start: src + len, end: range.end });
+      // deconstruct the line into convenient variables
+
+      const [dst, src, len] = line;
+
+      // some data at the end matches the map
+      if (range.end >= src && range.start < src && range.end < src + len) {
+        // overlapping section, converted
+        newRanges.push({
+          start: src + (dst - src),
+          end: range.end + (dst - src),
+        });
+        // not overlapping section
+        newRanges.push({ start: range.start, end: src - 1 });
+        wasConverted = true;
       }
-      // no overlap, maps fully
+      // some data at the start matches the map
+      else if (
+        range.start >= src &&
+        range.end >= src + len &&
+        range.start < src + len
+      ) {
+        // overlapping section, converted
+        newRanges.push({
+          start: range.start + (dst - src),
+          end: src + len - 1 + (dst - src),
+        });
+        // not overlapping section
+        newRanges.push({ start: src + len, end: range.end });
+        wasConverted = true;
+      }
+      // else data maps fully
       else if (range.start >= src && range.end < src + len) {
         newRanges.push({
           start: range.start + (dst - src),
           end: range.end + (dst - src),
         });
+        wasConverted = true;
       }
     });
+
+    if (!wasConverted) newRanges.push(range);
   });
 
   return newRanges;
 };
 
-let soilNumbers = convertData(seedRanges, seedToSoil);
+let soilNumbers = convertData(seedsRanges, seedToSoil);
 let fertNumbers = convertData(soilNumbers, soilToFert);
 let waterNumbers = convertData(fertNumbers, fertToWater);
 let lightNumbers = convertData(waterNumbers, waterToLight);
 let tempNumbers = convertData(lightNumbers, lightToTemp);
-let humidNums = convertData(tempNumbers, tempToHumid);
-let locationNums = convertData(humidNums, humidToLoc);
+let humidNumbers = convertData(tempNumbers, tempToHumid);
+let locationNumbers = convertData(humidNumbers, humidToLoc);
 
-locationNums.forEach((demo) => {
-  console.log(demo);
-});
+console.log(locationNumbers);
+
+// get lowest location number from array of object ranges
+
+console.log(
+  locationNumbers.reduce((prev, curr) =>
+    prev.start < curr.start ? prev : curr
+  ).start
+);
