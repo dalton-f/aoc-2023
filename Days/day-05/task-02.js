@@ -4,9 +4,9 @@ let input = fs.readFileSync("days/day-05/input.txt", "utf-8"); // read file usin
 
 input = input.split(/\n\s*\n/); // split by a a full linebreak that seperates each piece of data
 
-let seedsRanges = [];
+let seedRanges = [];
 
-// use deconstruction to assign each map into a variable
+// deconstruct array into helpful variables
 
 let [
   seeds,
@@ -19,7 +19,7 @@ let [
   humidToLoc,
 ] = input;
 
-// format seeds by removing the text and creating an array of type number
+// format seeds into an array of numbers
 
 seeds = seeds
   .split(":")[1]
@@ -27,93 +27,82 @@ seeds = seeds
   .filter((item) => item)
   .map(Number);
 
-// loop through the seeds in pairs to generate the initial seed ranges
+// generate objects for ranges based on each seed pair
 
 for (let i = 0; i < seeds.length; i += 2) {
-  seedsRanges.push({ start: seeds[i], end: seeds[i] + seeds[i + 1] });
+  seedRanges.push({ start: seeds[i], end: seeds[i] + seeds[i + 1] });
 }
-
-// set up function to use for each map to do conversions
 
 const convertData = (data, map) => {
   let newRanges = [];
 
-  // format map by removing the text and generating an array of
+  // format map
 
   map = map
     .split(":")[1]
     .split("\n")
     .filter((item) => item);
 
-  // loop over each line in the map
+  while (data.length > 0) {
+    let range = data.shift();
 
-  data.forEach((range) => {
     let wasConverted = false;
-    map.forEach((line) => {
-      // split the line into an array of numbers so we can get each value
 
+    // check each range against each line
+
+    map.forEach((line) => {
+      // format line into an array of numbers
       line = line.split(" ").map(Number);
 
-      // deconstruct the line into convenient variables
+      // deconstruct it
 
       const [dst, src, len] = line;
 
-      // some data at the end matches the map
-      if (range.end >= src && range.start < src && range.end < src + len) {
-        // overlapping section, converted
+      let overflowStart = Math.max(range.start, src);
+      let overflowEnd = Math.min(range.end, src + len);
+
+      if (overflowStart < overflowEnd) {
         newRanges.push({
-          start: src + (dst - src),
-          end: range.end + (dst - src),
+          start: overflowStart - src + dst,
+          end: overflowEnd - src + dst,
         });
-        // not overlapping section
-        newRanges.push({ start: range.start, end: src - 1 });
+
         wasConverted = true;
-      }
-      // some data at the start matches the map
-      else if (
-        range.start >= src &&
-        range.end >= src + len &&
-        range.start < src + len
-      ) {
-        // overlapping section, converted
-        newRanges.push({
-          start: range.start + (dst - src),
-          end: src + len - 1 + (dst - src),
-        });
-        // not overlapping section
-        newRanges.push({ start: src + len, end: range.end });
-        wasConverted = true;
-      }
-      // else data maps fully
-      else if (range.start >= src && range.end < src + len) {
-        newRanges.push({
-          start: range.start + (dst - src),
-          end: range.end + (dst - src),
-        });
-        wasConverted = true;
+
+        // pushes anythign that doesn't get mapped back into data to check if it maps to other lines
+
+        if (overflowStart > range.start) {
+          data.push({ start: range.start, end: overflowStart });
+        }
+
+        if (range.end > overflowEnd) {
+          data.push({ start: overflowEnd, end: range.end });
+        }
       }
     });
 
+    // if it cannot be mapped, maps to itself
+
     if (!wasConverted) newRanges.push(range);
-  });
+  }
 
   return newRanges;
 };
 
-let soilNumbers = convertData(seedsRanges, seedToSoil);
-let fertNumbers = convertData(soilNumbers, soilToFert);
-let waterNumbers = convertData(fertNumbers, fertToWater);
-let lightNumbers = convertData(waterNumbers, waterToLight);
-let tempNumbers = convertData(lightNumbers, lightToTemp);
-let humidNumbers = convertData(tempNumbers, tempToHumid);
-let locationNumbers = convertData(humidNumbers, humidToLoc);
+let soilRanges = convertData(seedRanges, seedToSoil);
+let fertRanges = convertData(soilRanges, soilToFert);
+let waterRanges = convertData(fertRanges, fertToWater);
+let lightRanges = convertData(waterRanges, waterToLight);
+let tempRanges = convertData(lightRanges, lightToTemp);
+let humidRanges = convertData(tempRanges, tempToHumid);
+let locationRanges = convertData(humidRanges, humidToLoc);
 
-console.log(locationNumbers);
+// 46 - 56, 56 - 60, 60 - 61, 82 - 85, 86 - 90, 94 - 97, 97 - 99
 
-// get lowest location number from array of object ranges
-
-console.log(
-  locationNumbers.reduce((prev, curr) =>
-    prev.start < curr.start ? prev : curr
-  ).start
+let lowestLoc = locationRanges.reduce((prev, curr) =>
+  prev.start < curr.start ? prev : curr
 );
+
+console.log(lowestLoc);
+
+// 99751240
