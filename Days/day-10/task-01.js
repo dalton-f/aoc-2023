@@ -40,7 +40,24 @@ if (
   currentIndex--;
 }
 
-// go around the loop until we return to start
+const moveInDirection = (direction) => {
+  switch (direction) {
+    case "right":
+      currentIndex++;
+      break;
+    case "left":
+      currentIndex--;
+      break;
+    case "up":
+      currentLine--;
+      break;
+    case "down":
+      currentLine++;
+      break;
+  }
+};
+
+// move through the loop until we reach the start again
 
 do {
   const currentChar = input[currentLine][currentIndex];
@@ -49,63 +66,33 @@ do {
 
   switch (currentChar) {
     case "-":
-      if (prevDir === "right") {
-        currentIndex++;
-        prevDir = "right";
-      } else {
-        currentIndex--;
-        prevDir = "left";
-      }
+      prevDir = prevDir === "right" ? "right" : "left";
+      moveInDirection(prevDir);
       break;
 
     case "|":
-      if (prevDir === "down") {
-        currentLine++;
-        prevDir = "down";
-      } else {
-        currentLine--;
-        prevDir = "up";
-      }
+      prevDir = prevDir === "down" ? "down" : "up";
+      moveInDirection(prevDir);
       break;
 
     case "7":
-      if (prevDir === "up") {
-        currentIndex--;
-        prevDir = "left";
-      } else if (prevDir === "right") {
-        currentLine++;
-        prevDir = "down";
-      }
+      prevDir = prevDir === "up" ? "left" : "down";
+      moveInDirection(prevDir);
       break;
 
     case "J":
-      if (prevDir === "down") {
-        currentIndex--;
-        prevDir = "left";
-      } else {
-        currentLine--;
-        prevDir = "up";
-      }
+      prevDir = prevDir === "down" ? "left" : "up";
+      moveInDirection(prevDir);
       break;
 
     case "L":
-      if (prevDir === "left") {
-        currentLine--;
-        prevDir = "up";
-      } else {
-        currentIndex++;
-        prevDir = "right";
-      }
+      prevDir = prevDir === "left" ? "up" : "right";
+      moveInDirection(prevDir);
       break;
 
     case "F":
-      if (prevDir === "up") {
-        currentIndex++;
-        prevDir = "right";
-      } else {
-        currentLine++;
-        prevDir = "down";
-      }
+      prevDir = prevDir === "up" ? "right" : "down";
+      moveInDirection(prevDir);
       break;
   }
 
