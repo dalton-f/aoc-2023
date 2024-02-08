@@ -7,9 +7,11 @@ let emptyRows = [];
 let emptyCols = [];
 let galaxies = [];
 
+// Get input via node
+
 const fs = require("fs");
 
-let input = fs.readFileSync("days/day-11/input.txt", "utf-8"); // read file using node
+let input = fs.readFileSync("days/day-11/input.txt", "utf-8");
 
 // Remove any blank lines at the start or end of the input, and split into an array by new
 // Loop over the lines and split them into arrays
