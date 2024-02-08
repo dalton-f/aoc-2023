@@ -94,3 +94,5 @@ for (let i = 0; i < galaxies.length; i++) {
 }
 
 console.log(sum);
+
+// NOTE: the code works on codepen and generates the correct answer, not sure hwy it throws a bug here.
