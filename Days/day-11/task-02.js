@@ -11,7 +11,7 @@ let galaxies = [];
 
 const fs = require("fs");
 
-let input = fs.readFileSync("days/day-11/input.txt", "utf-8");
+let input = fs.readFileSync("day-11/input.txt", "utf-8");
 
 // Remove any blank lines at the start or end of the input, and split into an array by new
 // Loop over the lines and split them into arrays
@@ -95,4 +95,4 @@ for (let i = 0; i < galaxies.length; i++) {
 
 console.log(sum);
 
-// NOTE: the code works on codepen and generates the correct answer, not sure hwy it throws a bug here.
+// NOTE: the code works on codepen and generates the correct answer, not sure why it throws a bug here.
